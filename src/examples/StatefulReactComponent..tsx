@@ -10,7 +10,7 @@ interface StatefulReactComponentProps {
 interface StatefulReactComponentState {
     publicStatus: boolean;
 }
-
+//this isn't the pattern I want to use, see RatCage.tsx for stateful example
 class StatefulReactComponent extends Component<StatefulReactComponentProps, StatefulReactComponentState> {
     state: StatefulReactComponentState = {
         publicStatus: false
