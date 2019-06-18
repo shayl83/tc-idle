@@ -20,7 +20,9 @@ type RatCageState = typeof InitialState
 
 class RatCage extends React.Component<RatCageProps, RatCageState> {
     public readonly state = InitialState;
-
+    
+    //you had to use this kind of function because your onClick function inside the button is set to the wrong type
+    //it needs to be setup to be a react.mousevent function type
     private addRats() : void {
         let countRats = this.state.rats;
         this.setState({
