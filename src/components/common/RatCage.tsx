@@ -1,8 +1,7 @@
 /* eslint-disable import/first */
 
 import * as React from "react";
-const {Component} = React;
-import { Button } from '../../components/ux/Button';
+import RatButton from '../ux/RatButton';
 import Rats from '../common/Rats';
 
 interface RatCageProps {
@@ -13,28 +12,32 @@ interface RatCageProps {
     // count:
 }
 
-interface RatCageState {
-    // count: number
-}
+const InitialState = {
+    rats: 0
+};
 
-class RatCage extends Component<RatCageProps, RatCageState> {
-    // state: RatCageState = {
-    //     count: 1
-    // };
+type RatCageState = typeof InitialState
 
-    // changeStatus = () => {
-    //     this.setState({
-    //         publicStatus: (!this.state.publicStatus)
-    //     });
-    // };
+class RatCage extends React.Component<RatCageProps, RatCageState> {
+    public readonly state = InitialState;
 
+    private addRats() : void {
+        let countRats = this.state.rats;
+        this.setState({
+            rats: countRats++
+        });
+        console.log('add rats clicked');
+    }
     render(){
         const { startupRats } = this.props;
         // const { } = this.state;
         return(
-            <div className={'metric-rat-cate-wrapper'}>
-                <Button text='Clone Rat' onClick={()=>{}} />
-                <Rats propRats={startupRats} />
+            <div className={'metric-rat-cage-wrapper'}>
+                <div>
+                    You have {startupRats} rats.
+                </div>
+                <RatButton className={'metric-btn-ratCage-cloneRats'} onClick={this.addRats}>Clone Rats</RatButton>
+                <Rats propRats={startupRats+this.state.rats} />
             </div>
         )
     }

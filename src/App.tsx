@@ -3,7 +3,7 @@ import './App.css';
 import RatCage from '../src/components/common/RatCage';
 import Rats from '../src/components/common/Rats';
 
-const STARTUP_RATS = 5;//this should be from somewhere, like local storage
+const STARTUP_RATS = 0;//this should be from somewhere, like local storage
 
 const App: React.FC = () => {
   return (
