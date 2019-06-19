@@ -23,13 +23,12 @@ class RatCage extends React.Component<RatCageProps, RatCageState> {
     
     //you had to use this kind of function because your onClick function inside the button is set to the wrong type
     //it needs to be setup to be a react.mousevent function type
-    private addRats() : void {
-        let countRats = this.state.rats;
-        this.setState({
-            rats: countRats++
+    addRats = (event: React.MouseEvent<HTMLButtonElement>) => {
+        this.setState(prevState => {
+            return {rats: prevState.rats + 1}
         });
         console.log('add rats clicked');
-    }
+    };
     render(){
         const { startupRats } = this.props;
         // const { } = this.state;

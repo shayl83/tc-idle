@@ -6,7 +6,8 @@ import App from './../App';
 
 describe('RatCage', () => {
     let wrapper;
-    it ('renders without crashing', ()=> {
+    it ('renders wrapper without crashing', ()=> {
         wrapper = shallow(<App />);
+        expect(wrapper.find('.ts-idle-main-wrapper').length).toBe(1);
     })
 });

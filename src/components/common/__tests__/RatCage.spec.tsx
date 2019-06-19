@@ -4,23 +4,25 @@ import * as React from "react";
 import { mount, shallow } from 'enzyme';
 import RatCage from './../RatCage';
 import RatButton from '../../ux/RatButton'
+import {ReactNode} from "react";
 
 describe('RatCage', () => {
-    let wrapper, onClickStub;
+    let wrapper: any, onClickStub, spy;
     beforeEach(() => {
-        onClickStub = jest.fn();
-        // wrapper = mount(<RatCage startupRats={0} />);
-        // spy =  jest.spyOn(RatCage.prototype, 'addRats').mockImplementation(() => true);
         wrapper = mount(<RatCage startupRats={0} />);
     });
     it ('renders with the rat wrapper class', ()=> {
         expect(wrapper.find('.metric-rat-cage-wrapper').length).toBe(1);
     });
-    it ('should call onclick when button is clicked', ()=> {
-        const button = wrapper.find('button.metric-btn-ratCage-cloneRats');
+    it ('state of rats should increase when addRats is called', ()=> {
+        const wrapper = shallow(<RatCage startupRats={0} />);
+        const instance = wrapper.instance() as RatCage;
+        // const params = MouseEvent<HTMLButtonElement>;
+        const prevState = instance.state.rats;
+        instance.addRats();
+        expect(instance.state.rats).toBeGreaterThan(prevState);
 
-        console.log(button.debug());
-        button.simulate('click');
-        expect(onClickStub).toBeCalled();
+        // instance.handleClick(params, false);
+        // expect(instance.selectedItems.has('test')).toBeFalsy();
     })
 });

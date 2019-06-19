@@ -3,7 +3,7 @@ import {ReactNode} from "react";
 
 interface ButtonProps {
     //STACEY YOU DUMMY - THIS IS WHERE THE BUG IS, WRONG TYPE
-    onClick?: () => void
+    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
     children: ReactNode,
     className?: string
 }
