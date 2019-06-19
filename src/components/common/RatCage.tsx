@@ -7,9 +7,6 @@ import Rats from '../common/Rats';
 interface RatCageProps {
     name?: string,
     startupRats: number
-    // username: string,
-    // age: number
-    // count:
 }
 
 const InitialState = {
@@ -20,25 +17,37 @@ type RatCageState = typeof InitialState
 
 class RatCage extends React.Component<RatCageProps, RatCageState> {
     public readonly state = InitialState;
-    
-    //you had to use this kind of function because your onClick function inside the button is set to the wrong type
-    //it needs to be setup to be a react.mousevent function type
+    public timer: any;
     addRats = (event: React.MouseEvent<HTMLButtonElement>) => {
         this.setState(prevState => {
             return {rats: prevState.rats + 1}
         });
-        console.log('add rats clicked');
     };
+    //fat arrows here for scoping
+    initAutoRats = () => {
+        //this can be run multiple times so need to fix that
+        this.setState(prevState => {
+            return {rats: prevState.rats + 1}
+        });
+    };
+    startTimer = () =>{
+        window.setInterval(()=>this.initAutoRats(), 500);
+    };
+    componentWillUnmount() {
+        clearInterval(this.timer);
+    }
     render(){
         const { startupRats } = this.props;
-        // const { } = this.state;
         return(
             <div className={'metric-rat-cage-wrapper'}>
                 <div>
-                    You have {startupRats} rats.
+                    You started with {startupRats} rats.
                 </div>
                 <RatButton className={'metric-btn-ratCage-cloneRats'} onClick={this.addRats}>Clone Rats</RatButton>
-                <Rats propRats={startupRats+this.state.rats} />
+                <RatButton onClick={this.startTimer}>
+                    Start auto rats
+                </RatButton>
+                Current Rats: <Rats propRats={startupRats+this.state.rats} />
             </div>
         )
     }
